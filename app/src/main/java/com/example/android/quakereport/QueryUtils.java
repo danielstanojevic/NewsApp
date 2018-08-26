@@ -72,7 +72,7 @@ public final class QueryUtils {
  Create Earthquake java object from magnitude, location, and time
  Add earthquake to list of earthquakes
  */
-            JSONObject root = new JSONObject(SAMPLE_JSON_RESPONSE_COLOR);
+            JSONObject root = new JSONObject(SAMPLE_JSON_RESPONSE);
             JSONArray earthquakeArray = root.getJSONArray("features");
             for (int i=0; i < earthquakeArray.length(); i++) {
                 JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
@@ -81,8 +81,9 @@ public final class QueryUtils {
                 double magnitude = properties.getDouble("mag");
                 String location = properties.getString("place");
                 long time = properties.getLong("time");
+                String url = properties.getString("url");
 
-                Earthquake earthquake = new Earthquake(magnitude, location, time);
+                Earthquake earthquake = new Earthquake(magnitude, location, time, url);
                 earthquakes.add(earthquake);
             }
 
