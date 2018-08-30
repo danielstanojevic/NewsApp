@@ -18,6 +18,8 @@ public class Earthquake {
     //Url of earthquake
     private String mUrl;
 
+
+
     /**
      * Constructs a new {@link Earthquake} object.
      *
