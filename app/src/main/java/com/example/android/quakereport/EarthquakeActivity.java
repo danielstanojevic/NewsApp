@@ -45,6 +45,8 @@ public class EarthquakeActivity extends AppCompatActivity {
 //        earthquakes.add(new Earthquake("4.9","Rio De Janeiro","Nov 2, 2012"));
 //        earthquakes.add(new Earthquake("1.6","Paris","Dec 2, 2011"));
 
+        private static final String USGS_REQUEST_URL =
+                "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=6&limit=10";
         // Create a fake list of earthquakes.
         ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
 
