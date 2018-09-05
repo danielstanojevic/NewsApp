@@ -1,34 +1,34 @@
 package com.example.android.newsapp;
 
-//single earthquake
-public class Earthquake {
+//single article
+public class Article {
 
     //Magnitude of earthquake
     private double mMagnitude;
 
-    //Location of earthquake
+    //Category of earthquake
     private String mLocation;
 
-    //Date of earthquake
+    //Publish date of article
     private String mDate;
 
-    //Time of earthquake
+    //Publish time of article
     private long mTimeInMilliseconds;
 
-    //Url of earthquake
+    //Url of article
     private String mUrl;
 
 
 
     /**
-     * Constructs a new {@link Earthquake} object.
+     * Constructs a new {@link Article} object.
      *
      * @param magnitude is the magnitude (size) of the earthquake
      * @param location is the city location of the earthquake
      * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
      *  earthquake happened
      */
-    public Earthquake(double magnitude, String location, long timeInMilliseconds, String url) {
+    public Article(double magnitude, String location, long timeInMilliseconds, String url) {
         mMagnitude = magnitude;
         mLocation = location;
         mTimeInMilliseconds = timeInMilliseconds;

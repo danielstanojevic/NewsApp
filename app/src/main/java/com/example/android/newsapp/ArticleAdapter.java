@@ -12,12 +12,11 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import android.graphics.drawable.GradientDrawable;
 
-public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
+public class ArticleAdapter extends ArrayAdapter<Article> {
     //constructor
-    public EarthquakeAdapter(Context context, List<Earthquake> earthquakes) {
-        super(context, 0, earthquakes);
+    public ArticleAdapter(Context context, List<Article> articles) {
+        super(context, 0, articles);
     }
     private static final String LOCATION_SEPARATOR = " of ";
     //returns list item view of earthquakes
@@ -25,18 +24,18 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View listItemView = convertView;
         if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.earthquake_list_item, parent, false);
+            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.article_list_item, parent, false);
         }
 
         //find earthquake at the current position
-        Earthquake currentEarthquake = getItem(position);
+        Article currentArticle = getItem(position);
 
-        assert currentEarthquake != null;
+        assert currentArticle != null;
 
         //find textView with viewid magnitude
         //TextView magnitudeView = (TextView) listItemView.findViewById(R.id.magnitude);
         // Format the magnitude to show 1 decimal place
-        //String formattedMagnitude = formatMagnitude(currentEarthquake.getMagnitude());
+        //String formattedMagnitude = formatMagnitude(currentArticle.getMagnitude());
         //display the magnitude of the current quake in that textview
         //magnitudeView.setText(formattedMagnitude);
 
@@ -45,14 +44,14 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         //GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeView.getBackground();
 
         // Get the appropriate background color based on the current earthquake magnitude
-        //int magnitudeColor = getMagnitudeColor(currentEarthquake.getMagnitude());
+        //int magnitudeColor = getMagnitudeColor(currentArticle.getMagnitude());
 
         // Set the color on the magnitude circle
         //magnitudeCircle.setColor(magnitudeColor);
 
         String location_offset;
         String primary_location;
-        String location = currentEarthquake.getLocation();
+        String location = currentArticle.getLocation();
         if (location.contains(LOCATION_SEPARATOR)){
             //split it
             int splitIndex = location.indexOf(LOCATION_SEPARATOR)+4;
@@ -68,13 +67,13 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         //display the location offset of the current quake in that textview
         locationView.setText(location_offset);
 
-        //find textView with viewid primary_location
-        TextView primaryView = (TextView) listItemView.findViewById(R.id.primary_location);
+        //find textView with viewid headline
+        TextView primaryView = (TextView) listItemView.findViewById(R.id.headline);
         //display the primary location of the current quake in that textview
         primaryView.setText(primary_location);
 
         // Create a new Date object from the time in milliseconds of the earthquake
-        Date dateObject = new Date(currentEarthquake.getTimeInMilliseconds());
+        Date dateObject = new Date(currentArticle.getTimeInMilliseconds());
 
         //find textView with viewid date
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
