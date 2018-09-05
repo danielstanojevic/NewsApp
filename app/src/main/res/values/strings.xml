@@ -19,4 +19,5 @@
   if no specific kilometer distance from the primary location is given [CHAR LIMIT=30] -->
     <string name="near_the">Near the</string>
     <string name="disconnected">No internet connection found.</string>
+    <string name="invalid_response_code_message">Problem with the connection, please try again later.</string>
 </resources>

@@ -15,11 +15,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
- * Helper methods related to requesting and receiving earthquake data from USGS.
+ * Helper methods related to requesting and receiving article data from news api.
  */
 public final class QueryUtils {
 
@@ -47,6 +52,8 @@ public final class QueryUtils {
             "{\"type\":\"Feature\",\"properties\":{\"mag\":8.5,\"place\":\"227km SE of Sarangani, Philippines\",\"time\":1452530285900,\"updated\":1459304874040,\"tz\":480,\"url\":\"http://earthquake.usgs.gov/earthquakes/eventpage/us10004dj5\",\"detail\":\"http://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10004dj5&format=geojson\",\"felt\":1,\"cdi\":2.7,\"mmi\":7.5,\"alert\":\"green\",\"status\":\"reviewed\",\"tsunami\":1,\"sig\":650,\"net\":\"us\",\"code\":\"10004dj5\",\"ids\":\",at00o0srjp,pt16011050,us10004dj5,gcmt20160111163807,\",\"sources\":\",at,pt,us,gcmt,\",\"types\":\",cap,dyfi,geoserve,impact-link,impact-text,losspager,moment-tensor,nearby-cities,origin,phase-data,shakemap,tectonic-summary,\",\"nst\":null,\"dmin\":3.144,\"rms\":0.72,\"gap\":22,\"magType\":\"mww\",\"type\":\"earthquake\",\"title\":\"M 6.5 - 227km SE of Sarangani, Philippines\"},\"geometry\":{\"type\":\"Point\",\"coordinates\":[126.8621,3.8965,13]},\"id\":\"us10004dj5\"},\n" +
             "{\"type\":\"Feature\",\"properties\":{\"mag\":9,\"place\":\"Pacific-Antarctic Ridge\",\"time\":1451986454620,\"updated\":1459202978040,\"tz\":-540,\"url\":\"http://earthquake.usgs.gov/earthquakes/eventpage/us10004bgk\",\"detail\":\"http://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us10004bgk&format=geojson\",\"felt\":0,\"cdi\":1,\"mmi\":0,\"alert\":\"green\",\"status\":\"reviewed\",\"tsunami\":0,\"sig\":554,\"net\":\"us\",\"code\":\"10004bgk\",\"ids\":\",us10004bgk,gcmt20160105093415,\",\"sources\":\",us,gcmt,\",\"types\":\",cap,dyfi,geoserve,losspager,moment-tensor,nearby-cities,origin,phase-data,shakemap,\",\"nst\":null,\"dmin\":30.75,\"rms\":0.67,\"gap\":71,\"magType\":\"mww\",\"type\":\"earthquake\",\"title\":\"M 6.0 - Pacific-Antarctic Ridge\"},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-136.2603,-54.2906,10]},\"id\":\"us10004bgk\"}],\"bbox\":[-153.4051,-54.2906,10,158.5463,59.6363,582.56]}";
     */
+
+    private static final String SAMPLE_RESPONSE = "{\"response\":{\"status\":\"ok\",\"userTier\":\"developer\",\"total\":2547,\"startIndex\":1,\"pageSize\":10,\"currentPage\":1,\"pages\":255,\"orderBy\":\"relevance\",\"results\":[{\"id\":\"technology/2018/aug/29/coding-algorithms-frankenalgos-program-danger\",\"type\":\"article\",\"sectionId\":\"technology\",\"sectionName\":\"Technology\",\"webPublicationDate\":\"2018-08-30T05:00:48Z\",\"webTitle\":\"Franken-algorithms: the deadly consequences of unpredictable code\",\"webUrl\":\"https://www.theguardian.com/technology/2018/aug/29/coding-algorithms-frankenalgos-program-danger\",\"apiUrl\":\"https://content.guardianapis.com/technology/2018/aug/29/coding-algorithms-frankenalgos-program-danger\",\"isHosted\":false,\"pillarId\":\"pillar/news\",\"pillarName\":\"News\"},{\"id\":\"commentisfree/2018/jul/26/tech-healthcare-ethics-artifical-intelligence-doctors-patients\",\"type\":\"article\",\"sectionId\":\"commentisfree\",\"sectionName\":\"Opinion\",\"webPublicationDate\":\"2018-07-26T11:48:00Z\",\"webTitle\":\"Algorithms may outperform doctors, but theyâ€™re no healthcare panacea | Ivana Bartoletti\",\"webUrl\":\"https://www.theguardian.com/commentisfree/2018/jul/26/tech-healthcare-ethics-artifical-intelligence-doctors-patients\",\"apiUrl\":\"https://content.guardianapis.com/commentisfree/2018/jul/26/tech-healthcare-ethics-artifical-intelligence-doctors-patients\",\"isHosted\":false,\"pillarId\":\"pillar/opinion\",\"pillarName\":\"Opinion\"},{\"id\":\"commentisfree/2018/may/13/we-created-poverty-algorithms-wont-make-that-go-away\",\"type\":\"article\",\"sectionId\":\"commentisfree\",\"sectionName\":\"Opinion\",\"webPublicationDate\":\"2018-05-13T10:00:04Z\",\"webTitle\":\"We created poverty. Algorithms won't make that go away | Virginia Eubanks\",\"webUrl\":\"https://www.theguardian.com/commentisfree/2018/may/13/we-created-poverty-algorithms-wont-make-that-go-away\",\"apiUrl\":\"https://content.guardianapis.com/commentisfree/2018/may/13/we-created-poverty-algorithms-wont-make-that-go-away\",\"isHosted\":false,\"pillarId\":\"pillar/opinion\",\"pillarName\":\"Opinion\"},{\"id\":\"world/commentisfree/2018/jul/12/algorithm-privacy-data-surveillance\",\"type\":\"article\",\"sectionId\":\"world\",\"sectionName\":\"World news\",\"webPublicationDate\":\"2018-07-12T09:00:37Z\",\"webTitle\":\"Algorithms are taking over â€“ and woe betide anyone they class as a 'deadbeat' | Zoe Williams\",\"webUrl\":\"https://www.theguardian.com/world/commentisfree/2018/jul/12/algorithm-privacy-data-surveillance\",\"apiUrl\":\"https://content.guardianapis.com/world/commentisfree/2018/jul/12/algorithm-privacy-data-surveillance\",\"isHosted\":false,\"pillarId\":\"pillar/news\",\"pillarName\":\"News\"},{\"id\":\"books/2018/jul/24/ada-lovelace-first-edition-pioneering-algorithm-program\",\"type\":\"article\",\"sectionId\":\"books\",\"sectionName\":\"Books\",\"webPublicationDate\":\"2018-07-24T13:23:22Z\",\"webTitle\":\"First edition of Ada Lovelace's pioneering algorithm sold for Â£95,000\",\"webUrl\":\"https://www.theguardian.com/books/2018/jul/24/ada-lovelace-first-edition-pioneering-algorithm-program\",\"apiUrl\":\"https://content.guardianapis.com/books/2018/jul/24/ada-lovelace-first-edition-pioneering-algorithm-program\",\"isHosted\":false,\"pillarId\":\"pillar/arts\",\"pillarName\":\"Arts\"},{\"id\":\"commentisfree/2018/apr/04/algorithms-powerful-europe-response-social-media\",\"type\":\"article\",\"sectionId\":\"commentisfree\",\"sectionName\":\"Opinion\",\"webPublicationDate\":\"2018-04-04T05:00:17Z\",\"webTitle\":\"Algorithms have become so powerful we need a robust, Europe-wide response | Marietje Schaake\",\"webUrl\":\"https://www.theguardian.com/commentisfree/2018/apr/04/algorithms-powerful-europe-response-social-media\",\"apiUrl\":\"https://content.guardianapis.com/commentisfree/2018/apr/04/algorithms-powerful-europe-response-social-media\",\"isHosted\":false,\"pillarId\":\"pillar/opinion\",\"pillarName\":\"Opinion\"},{\"id\":\"science/2017/nov/03/from-health-to-crimefighting-ai-has-brought-us-to-the-threshold-of-a-new-era\",\"type\":\"article\",\"sectionId\":\"science\",\"sectionName\":\"Science\",\"webPublicationDate\":\"2017-11-03T11:00:22Z\",\"webTitle\":\"The algorithms that are already changing your life\",\"webUrl\":\"https://www.theguardian.com/science/2017/nov/03/from-health-to-crimefighting-ai-has-brought-us-to-the-threshold-of-a-new-era\",\"apiUrl\":\"https://content.guardianapis.com/science/2017/nov/03/from-health-to-crimefighting-ai-has-brought-us-to-the-threshold-of-a-new-era\",\"isHosted\":false,\"pillarId\":\"pillar/news\",\"pillarName\":\"News\"},{\"id\":\"commentisfree/2018/mar/05/algorithms-rate-credit-scores-finances-data\",\"type\":\"article\",\"sectionId\":\"commentisfree\",\"sectionName\":\"Opinion\",\"webPublicationDate\":\"2018-03-05T06:00:08Z\",\"webTitle\":\"The tyranny of algorithms is part of our lives: soon they could rate everything we do | John Harris\",\"webUrl\":\"https://www.theguardian.com/commentisfree/2018/mar/05/algorithms-rate-credit-scores-finances-data\",\"apiUrl\":\"https://content.guardianapis.com/commentisfree/2018/mar/05/algorithms-rate-credit-scores-finances-data\",\"isHosted\":false,\"pillarId\":\"pillar/opinion\",\"pillarName\":\"Opinion\"},{\"id\":\"technology/2018/may/15/twitter-ranking-algorithm-change-trolling-harassment-abuse\",\"type\":\"article\",\"sectionId\":\"technology\",\"sectionName\":\"Technology\",\"webPublicationDate\":\"2018-05-15T16:00:23Z\",\"webTitle\":\"Twitter announces global change to algorithm in effort to tackle harassment\",\"webUrl\":\"https://www.theguardian.com/technology/2018/may/15/twitter-ranking-algorithm-change-trolling-harassment-abuse\",\"apiUrl\":\"https://content.guardianapis.com/technology/2018/may/15/twitter-ranking-algorithm-change-trolling-harassment-abuse\",\"isHosted\":false,\"pillarId\":\"pillar/news\",\"pillarName\":\"News\"},{\"id\":\"commentisfree/2018/aug/05/magical-thinking-about-machine-learning-will-not-bring-artificial-intelligence-any-closer\",\"type\":\"article\",\"sectionId\":\"commentisfree\",\"sectionName\":\"Opinion\",\"webPublicationDate\":\"2018-08-05T06:00:03Z\",\"webTitle\":\"Magical thinking about machine learning wonâ€™t bring the reality of AI any closer | John Naughton\",\"webUrl\":\"https://www.theguardian.com/commentisfree/2018/aug/05/magical-thinking-about-machine-learning-will-not-bring-artificial-intelligence-any-closer\",\"apiUrl\":\"https://content.guardianapis.com/commentisfree/2018/aug/05/magical-thinking-about-machine-learning-will-not-bring-artificial-intelligence-any-closer\",\"isHosted\":false,\"pillarId\":\"pillar/opinion\",\"pillarName\":\"Opinion\"}]}}";
     /**
      * Tag for the log messages
      */
@@ -99,10 +106,11 @@ public final class QueryUtils {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
+                jsonResponse = String.valueOf(R.string.invalid_response_code_message);
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the article JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -135,10 +143,26 @@ public final class QueryUtils {
         return output.toString();
     }
 
+    //Helper method to convert date time stamp from ISO 8601 to Unix time
+    public static Date fromISO8601UTC(String dateStr) {
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        df.setTimeZone(tz);
+
+        try {
+            return df.parse(dateStr);
+        } catch (ParseException e) {
+            Log.e("QueryUtils", "Problem converting date time from ISO8601 to Unix", e);
+        }
+
+
+        return null;
+    }
+
     /**
-     * Query the USGS dataset and return a list of {@link Article} objects.
+     * Query the news api and return a list of {@link Article} objects.
      */
-    public static List<Article> fetchEarthquakeData(String requestUrl) {
+    public static List<Article> fetchArticleData(String requestUrl) {
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -149,7 +173,7 @@ public final class QueryUtils {
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
-
+//jsonResponse = SAMPLE_RESPONSE;
         // Extract relevant fields from the JSON response and create a list of {@link Article}s
         List<Article> articles = extractFeatureFromJson(jsonResponse);
 
@@ -165,9 +189,9 @@ public final class QueryUtils {
      * Return a list of {@link Article} objects that has been built up from
      * parsing the given JSON response.
      */
-    private static List<Article> extractFeatureFromJson(String earthquakeJSON) {
+    private static List<Article> extractFeatureFromJson(String articleJSON) {
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(earthquakeJSON)) {
+        if (TextUtils.isEmpty(articleJSON)) {
             return null;
         }
 
@@ -180,38 +204,39 @@ public final class QueryUtils {
         try {
 
             // Create a JSONObject from the JSON response string
-            JSONObject baseJsonResponse = new JSONObject(earthquakeJSON);
+            JSONObject baseJsonResponse = new JSONObject(articleJSON).getJSONObject("response");
 
-            // Extract the JSONArray associated with the key called "features",
-            // which represents a list of features (or articles).
-            JSONArray earthquakeArray = baseJsonResponse.getJSONArray("features");
+            // Extract the JSONArray associated with the key called "results",
+            // which represents a list of articles.
 
-            // For each earthquake in the earthquakeArray, create an {@link Article} object
-            for (int i = 0; i < earthquakeArray.length(); i++) {
+            JSONArray articleArray = baseJsonResponse.getJSONArray("results");
+            Log.e(LOG_TAG, "articleArray results: "+articleArray);
+            // For each earthquake in the articleArray, create an {@link Article} object
+            for (int i = 0; i < articleArray.length(); i++) {
 
                 // Get a single article at position i within the list of articles
-                JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
+                JSONObject currentArticle = articleArray.getJSONObject(i);
 
-                // For a given article, extract the JSONObject associated with the
-                // key called "properties", which represents a list of all properties
-                // for that article.
-                JSONObject properties = currentEarthquake.getJSONObject("properties");
-
-                // Extract the value for the key called "mag"
-                double magnitude = properties.getDouble("mag");
-
-                // Extract the value for the key called "place"
-                String location = properties.getString("place");
-
-                // Extract the value for the key called "time"
-                long time = properties.getLong("time");
-
+                // Extract the value for the key called "webTitle"
+                String headline = currentArticle.getString("webTitle");
+                Log.e(LOG_TAG, "Headline: "+headline);
+                // Extract the value for the key called "sectionName"
+                String category = currentArticle.getString("sectionName");
+                Log.e(LOG_TAG, "Category: "+category);
+                // Extract the value for the key called "webPublicaitonDate"
+                String published = currentArticle.getString("webPublicationDate");
+                Log.e(LOG_TAG, "Publication Date: "+published);
+                long time = 0;
+                if (published != null) {
+                    time = fromISO8601UTC(published).getTime();
+                }
+                Log.e(LOG_TAG, "Time: "+time);
                 // Extract the value for the key called "url"
-                String url = properties.getString("url");
-
-                // Create a new {@link Article} object with the magnitude, location, time,
+                String url = currentArticle.getString("webUrl");
+                Log.e(LOG_TAG, "url: "+url);
+                // Create a new {@link Article} object with the headline, category, time,
                 // and url from the JSON response.
-                Article article = new Article(magnitude, location, time, url);
+                Article article = new Article(headline, category, time, url);
 
                 // Add the new {@link Article} to the list of articles.
                 articles.add(article);
@@ -221,7 +246,7 @@ public final class QueryUtils {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the article JSON results", e);
         }
 
         // Return the list of articles

@@ -58,7 +58,7 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
         }
 
         // Perform the network request, parse the response, and extract a list of articles.
-        List<Article> articles = QueryUtils.fetchEarthquakeData(mUrl);
+        List<Article> articles = QueryUtils.fetchArticleData(mUrl);
         return articles;
     }
 }
