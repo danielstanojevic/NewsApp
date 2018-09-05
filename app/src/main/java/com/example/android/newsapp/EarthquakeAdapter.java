@@ -1,4 +1,4 @@
-package com.example.android.quakereport;
+package com.example.android.newsapp;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.util.Date;
-import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import android.graphics.drawable.GradientDrawable;
@@ -64,8 +63,8 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
             primary_location = location;
         }
 
-        //find textView with viewid location_offset
-        TextView locationView = (TextView) listItemView.findViewById(R.id.location_offset);
+        //find textView with viewid category
+        TextView locationView = (TextView) listItemView.findViewById(R.id.category);
         //display the location offset of the current quake in that textview
         locationView.setText(location_offset);
 

@@ -1,4 +1,4 @@
-package com.example.android.quakereport;
+package com.example.android.newsapp;
 
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;

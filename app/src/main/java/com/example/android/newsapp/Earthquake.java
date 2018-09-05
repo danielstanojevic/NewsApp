@@ -1,4 +1,4 @@
-package com.example.android.quakereport;
+package com.example.android.newsapp;
 
 //single earthquake
 public class Earthquake {
