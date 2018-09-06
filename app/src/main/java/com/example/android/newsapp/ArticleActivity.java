@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
+import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,8 @@ public class ArticleActivity extends AppCompatActivity
 
     private static final String LOG_TAG = ArticleActivity.class.getName();
 
-    /** URL for earthquake data from the USGS dataset */
+    /** URL for article data from the guardian news api */
+    //String key = getResources().getString(R.string.NEWSGUARDIAN_ID);
     private static final String REQUEST_URL =
             "http://content.guardianapis.com/search?q=algorithms&api-key=test";
 

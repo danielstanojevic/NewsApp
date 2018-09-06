@@ -5,11 +5,12 @@ android {
     buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "com.example.android.quakereport"
+        applicationId "com.example.android.newsapp"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        resValue "string", "guardian_app_id", "$System.env.NEWSGUARDIAN_ID"
     }
     buildTypes {
         release {
