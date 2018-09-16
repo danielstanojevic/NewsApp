@@ -9,20 +9,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import java.lang.StringBuilder;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleActivity extends AppCompatActivity
         implements LoaderCallbacks<List<Article>> {
 
-    private static final String LOG_TAG = ArticleActivity.class.getName();
 
-    /** URL for article data from the guardian news api */
-    //String key = getResources().getString(R.string.NEWSGUARDIAN_ID);
-    private static final String REQUEST_URL =
-            "http://content.guardianapis.com/search?q=algorithms&api-key=test";
+    /**
+     * URL for article data from the guardian news api
+     */
+    private static final String BASE_REQUEST_URL =
+            "https://content.guardianapis.com/search?q=algorithms&api-key=";
+    private static final String apiKey = BuildConfig.THE_GUARDIAN_API_KEY;
+
+    private static final String REQUEST_URL = BASE_REQUEST_URL + apiKey;
 
     /**
      * Constant value for the article loader ID. We can choose any integer.
@@ -30,7 +35,9 @@ public class ArticleActivity extends AppCompatActivity
      */
     private static final int ARTICLE_LOADER_ID = 1;
 
-    /** Adapter for the list of articles */
+    /**
+     * Adapter for the list of articles
+     */
     private ArticleAdapter mAdapter;
 
     @Override
@@ -40,6 +47,9 @@ public class ArticleActivity extends AppCompatActivity
 
         // Find a reference to the {@link ListView} in the layout
         ListView articleListView = (ListView) findViewById(R.id.list);
+        //TextView emptyText = (TextView) findViewById(R.id.emptyResults).
+        assert articleListView != null;
+        articleListView.setEmptyView(findViewById(R.id.emptyResults));
 
         // Create a new adapter that takes an empty list of articles as input
         mAdapter = new ArticleAdapter(this, new ArrayList<Article>());
@@ -57,6 +67,7 @@ public class ArticleActivity extends AppCompatActivity
                 Article currentArticle = mAdapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
+                assert currentArticle != null;
                 Uri articleUri = Uri.parse(currentArticle.getUrl());
 
                 // Create a new intent to view the article URI

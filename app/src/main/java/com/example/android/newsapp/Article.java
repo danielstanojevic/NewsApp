@@ -18,10 +18,11 @@ public class Article {
     /**
      * Constructs a new {@link Article} object.
      *
-     * @param headline is the magnitude (size) of the earthquake
-     * @param category is the city category of the earthquake
+     * @param headline           is the magnitude (size) of the earthquake
+     * @param category           is the city category of the earthquake
      * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
-     *  earthquake happened
+     *                           earthquake happened
+     * @param url                is the link to more details about the earthquake
      */
     Article(String headline, String category, long timeInMilliseconds, String url) {
         mHeadline = headline;

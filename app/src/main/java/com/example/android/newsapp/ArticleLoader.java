@@ -26,19 +26,19 @@ import java.util.List;
  */
 public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
 
-    /** Tag for log messages */
-    private static final String LOG_TAG = ArticleLoader.class.getName();
 
-    /** Query URL */
+    /**
+     * Query URL
+     */
     private String mUrl;
 
     /**
      * Constructs a new {@link ArticleLoader}.
      *
      * @param context of the activity
-     * @param url to load data from
+     * @param url     to load data from
      */
-    public ArticleLoader(Context context, String url) {
+    ArticleLoader(Context context, String url) {
         super(context);
         mUrl = url;
     }

@@ -1,6 +1,7 @@
 package com.example.android.newsapp;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,17 @@ import java.util.List;
 
 
 public class ArticleAdapter extends ArrayAdapter<Article> {
+    private static final String HEADLINE_SEPARATOR = " | ";
+
     //constructor
-    public ArticleAdapter(Context context, List<Article> articles) {
+    ArticleAdapter(Context context, List<Article> articles) {
         super(context, 0, articles);
     }
-    private static final String HEADLINE_SEPARATOR = " | ";
+
     //returns list item view of articles
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.article_list_item, parent, false);
@@ -35,16 +39,16 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         String article_author;
         String headline = currentArticle.getHeadline();
         String category = currentArticle.getCategory();
-        if (headline.contains(HEADLINE_SEPARATOR)){
+        if (headline.contains(HEADLINE_SEPARATOR)) {
             //split it
-            int splitIndex = headline.indexOf(HEADLINE_SEPARATOR)+3;
-            article_headline = headline.substring(0,splitIndex);
-            article_author = headline.substring(splitIndex,headline.length()) + " | ";
+            int splitIndex = headline.indexOf(HEADLINE_SEPARATOR) + 3;
+            article_headline = headline.substring(0, splitIndex);
+            article_author = headline.substring(splitIndex, headline.length()) + " | ";
         } else {
             article_headline = headline;
             article_author = "";
         }
-        headline = article_author+article_headline;
+        headline = article_author + article_headline;
         //find textView with viewid category
         TextView locationView = (TextView) listItemView.findViewById(R.id.category);
         //display the category of the current article in that textview
