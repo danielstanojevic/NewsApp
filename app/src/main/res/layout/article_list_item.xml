@@ -3,18 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal"
-    android:paddingEnd="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingStart="8dp">
+    android:paddingEnd="@dimen/margin16"
+    android:paddingLeft="@dimen/margin16"
+    android:paddingRight="@dimen/margin16"
+    android:paddingStart="@dimen/margin8">
 
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="@dimen/margin16"
+        android:layout_marginStart="@dimen/margin16"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -23,12 +23,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:typeface="sans"
             android:maxLines="1"
             android:textAllCaps="true"
             android:textColor="@color/textColorArticleCategory"
-            android:textSize="12sp"
-            tools:text="Category" />
+            android:textSize="@dimen/categoryTextSize"
+            android:typeface="sans"
+            tools:text="@string/categoryTextPlaceholder" />
 
 
         <TextView
@@ -38,8 +38,8 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/textColorArticleHeadline"
-            android:textSize="16sp"
-            tools:text="Long placeholder headline that should wrap to more than 2 lines of text" />
+            android:textSize="@dimen/categoryTextSize"
+            tools:text="@string/headlinePlaceholder" />
 
     </LinearLayout>
 
@@ -47,8 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="@dimen/margin16"
+        android:layout_marginStart="@dimen/margin16"
         android:orientation="vertical">
 
         <TextView
@@ -57,8 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:textColor="@color/textColorArticleCategory"
-            android:textSize="12sp"
-            tools:text="Mar 6, 2010" />
+            android:textSize="@dimen/categoryTextSize"
+            tools:text="@string/dateTextPlaceholder" />
 
         <TextView
             android:id="@+id/time"
@@ -66,8 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:textColor="@color/textColorArticleCategory"
-            android:textSize="12sp"
-            tools:text="3:00 PM" />
+            android:textSize="@dimen/categoryTextSize"
+            tools:text="@string/timeTextPlaceholder" />
 
     </LinearLayout>
 </LinearLayout>

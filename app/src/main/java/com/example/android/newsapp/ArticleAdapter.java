@@ -30,7 +30,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.article_list_item, parent, false);
         }
 
-        //find earthquake at the current position
+        //find article at the current position
         Article currentArticle = getItem(position);
 
         assert currentArticle != null;
@@ -49,13 +49,16 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
             article_author = "";
         }
         headline = article_author + article_headline;
+
         //find textView with viewid category
         TextView locationView = (TextView) listItemView.findViewById(R.id.category);
+
         //display the category of the current article in that textview
         locationView.setText(category);
 
         //find textView with viewid headline
         TextView primaryView = (TextView) listItemView.findViewById(R.id.headline);
+
         //display the primary headline of the current article in that textview
         primaryView.setText(headline);
 
@@ -64,9 +67,11 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         //find textView with viewid date
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
+
         // Format the date string (i.e. "Mar 3, 1984")
         String formattedDate = formatDate(dateObject);
-        // Display the date of the current earthquake in that TextView
+
+        // Display the date of the current article in that TextView
         dateView.setText(formattedDate);
 
         // Find the TextView with view ID time
@@ -74,7 +79,8 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         // Format the time string (i.e. "4:30PM")
         String formattedTime = formatTime(dateObject);
-        // Display the time of the current earthquake in that TextView
+
+        // Display the time of the current article in that TextView
         timeView.setText(formattedTime);
 
         return listItemView;

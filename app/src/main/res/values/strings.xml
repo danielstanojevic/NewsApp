@@ -18,4 +18,8 @@
     <string name="disconnected">No internet connection found.</string>
     <string name="invalid_response_code_message">Problem with the connection, please try again later.</string>
     <string name="empty_list">\"No data available.  Please check your connection or try again later.\"</string>
+    <string name="categoryTextPlaceholder">Category</string>
+    <string name="headlinePlaceholder">Long placeholder headline that should wrap to more than 2 lines of text</string>
+    <string name="dateTextPlaceholder">Mar 6, 2010</string>
+    <string name="timeTextPlaceholder">3:00 PM</string>
 </resources>
