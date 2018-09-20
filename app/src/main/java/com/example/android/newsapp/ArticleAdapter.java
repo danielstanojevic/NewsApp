@@ -48,6 +48,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
             article_headline = headline;
             article_author = "";
         }
+        article_author = currentArticle.getAuthor();
         headline = article_author + article_headline;
 
         //find textView with viewid category

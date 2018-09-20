@@ -57,6 +57,8 @@ public final class QueryUtils {
         return url;
     }
 
+    private static final int SUCCESS_CODE = 200;
+
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
@@ -79,7 +81,7 @@ public final class QueryUtils {
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == SUCCESS_CODE) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
@@ -213,7 +215,7 @@ public final class QueryUtils {
                 Log.e(LOG_TAG, "url: " + url);
                 // Create a new {@link Article} object with the headline, category, time,
                 // and url from the JSON response.
-                Article article = new Article(headline, category, time, url);
+                Article article = new Article(author, headline, category, time, url);
 
                 // Add the new {@link Article} to the list of articles.
                 articles.add(article);

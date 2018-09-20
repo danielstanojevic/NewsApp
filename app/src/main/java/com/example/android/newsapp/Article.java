@@ -3,6 +3,9 @@ package com.example.android.newsapp;
 //single article
 public class Article {
 
+    //Author of article
+    private String mAuthor;
+
     //Headline of article
     private String mHeadline;
 
@@ -18,19 +21,24 @@ public class Article {
     /**
      * Constructs a new {@link Article} object.
      *
-     * @param headline           is the magnitude (size) of the earthquake
-     * @param category           is the city category of the earthquake
-     * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
-     *                           earthquake happened
-     * @param url                is the link to more details about the earthquake
+     * @param author             is the
+     * @param headline           is the headline of the article
+     * @param category           is the category of the article
+     * @param timeInMilliseconds is the time in milliseconds when the
+     *                           article was published
+     * @param url                is the link to the article
      */
-    Article(String headline, String category, long timeInMilliseconds, String url) {
+    Article(String author, String headline, String category, long timeInMilliseconds, String url) {
+        mAuthor = author;
         mHeadline = headline;
         mCategory = category;
         mTimeInMilliseconds = timeInMilliseconds;
         mUrl = url;
     }
 
+    public String getAuthor() {
+        return mAuthor;
+    }
     public String getHeadline() {
         return mHeadline;
     }

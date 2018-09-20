@@ -2,14 +2,18 @@ package com.example.android.newsapp;
 
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -23,7 +27,7 @@ public class ArticleActivity extends AppCompatActivity
      * URL for article data from the guardian news api
      */
     private static final String BASE_REQUEST_URL =
-            "https://content.guardianapis.com/search?q=algorithms&api-key=";
+            "https://content.guardianapis.com/search?q=algorithms&show-tags=contributor&api-key=";
     private static final String apiKey = BuildConfig.THE_GUARDIAN_API_KEY;
 
     private static final String REQUEST_URL = BASE_REQUEST_URL + apiKey;
@@ -81,10 +85,21 @@ public class ArticleActivity extends AppCompatActivity
         // Get a reference to the LoaderManager, in order to interact with loaders.
         LoaderManager loaderManager = getLoaderManager();
 
-        // Initialize the loader. Pass in the int ID constant defined above and pass in null for
-        // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
-        // because this activity implements the LoaderCallbacks interface).
-        loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        assert cm != null;
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if (isConnected) {
+            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+            // because this activity implements the LoaderCallbacks interface).
+            loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
+        } else {
+            Toast.makeText(this,com.example.android.newsapp.R.string.noInternet, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

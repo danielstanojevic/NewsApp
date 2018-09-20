@@ -22,4 +22,5 @@
     <string name="headlinePlaceholder">Long placeholder headline that should wrap to more than 2 lines of text</string>
     <string name="dateTextPlaceholder">Mar 6, 2010</string>
     <string name="timeTextPlaceholder">3:00 PM</string>
+    <string name="noInternet">No internet connection detected. Please check your connection and try again.</string>
 </resources>
