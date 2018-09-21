@@ -41,6 +41,15 @@
             android:textSize="@dimen/categoryTextSize"
             tools:text="@string/headlinePlaceholder" />
 
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/textColorArticleHeadline"
+            android:textSize="@dimen/categoryTextSize"
+            tools:text="@string/authorPlaceholder" />
     </LinearLayout>
 
     <LinearLayout

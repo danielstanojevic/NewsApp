@@ -35,21 +35,22 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         assert currentArticle != null;
 
-        String article_headline;
+        String authorHeader;
         String article_author;
         String headline = currentArticle.getHeadline();
         String category = currentArticle.getCategory();
-        if (headline.contains(HEADLINE_SEPARATOR)) {
-            //split it
-            int splitIndex = headline.indexOf(HEADLINE_SEPARATOR) + 3;
-            article_headline = headline.substring(0, splitIndex);
-            article_author = headline.substring(splitIndex, headline.length()) + " | ";
-        } else {
-            article_headline = headline;
-            article_author = "";
-        }
+//        if (headline.contains(HEADLINE_SEPARATOR)) {
+//            //split it
+//            int splitIndex = headline.indexOf(HEADLINE_SEPARATOR) + 3;
+//            article_headline = headline.substring(0, splitIndex);
+//            article_author = headline.substring(splitIndex, headline.length()) + " | ";
+//        } else {
+//            article_headline = headline;
+//            article_author = "";
+//        }
         article_author = currentArticle.getAuthor();
-        headline = article_author + article_headline;
+        //headline = article_author + article_headline;
+        authorHeader = "Author: "+ article_author;
 
         //find textView with viewid category
         TextView locationView = (TextView) listItemView.findViewById(R.id.category);
@@ -63,7 +64,13 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         //display the primary headline of the current article in that textview
         primaryView.setText(headline);
 
-        // Create a new Date object from the time in milliseconds of the earthquake
+        //find textView with viewid author
+        TextView authorView = (TextView) listItemView.findViewById((R.id.author));
+
+        //display the author of the current article in that textview
+        authorView.setText(authorHeader);
+
+        // Create a new Date object from the time in milliseconds of the article publication
         Date dateObject = new Date(currentArticle.getTimeInMilliseconds());
 
         //find textView with viewid date

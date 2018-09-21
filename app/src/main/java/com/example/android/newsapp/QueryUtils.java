@@ -196,7 +196,18 @@ public final class QueryUtils {
                 // Get a single article at position i within the list of articles
                 JSONObject currentArticle = articleArray.getJSONObject(i);
 
+                //Get the tags array to extract the Author
+                JSONArray tags = currentArticle.getJSONArray("tags");
                 // Extract the value for the key called "webTitle"
+                String author = "";
+                if (currentArticle.has("tags")) {
+                    JSONArray tagsArray = currentArticle.getJSONArray("tags");
+
+                    if ((tagsArray.length() > 0) && (tagsArray.getJSONObject(0).has("webTitle"))) {
+                        author = tagsArray.getJSONObject(0).getString("webTitle");
+                    }
+                }
+
                 String headline = currentArticle.getString("webTitle");
                 Log.e(LOG_TAG, "Headline: " + headline);
                 // Extract the value for the key called "sectionName"
