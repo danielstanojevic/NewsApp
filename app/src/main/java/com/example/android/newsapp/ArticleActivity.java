@@ -86,7 +86,7 @@ public class ArticleActivity extends AppCompatActivity
         LoaderManager loaderManager = getLoaderManager();
 
         ConnectivityManager cm =
-                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -98,7 +98,7 @@ public class ArticleActivity extends AppCompatActivity
             // because this activity implements the LoaderCallbacks interface).
             loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
         } else {
-            Toast.makeText(this,com.example.android.newsapp.R.string.noInternet, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, com.example.android.newsapp.R.string.noInternet, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -39,6 +39,7 @@ public class Article {
     public String getAuthor() {
         return mAuthor;
     }
+
     public String getHeadline() {
         return mHeadline;
     }

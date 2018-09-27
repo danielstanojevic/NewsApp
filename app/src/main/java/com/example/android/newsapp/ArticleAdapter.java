@@ -39,18 +39,8 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         String article_author;
         String headline = currentArticle.getHeadline();
         String category = currentArticle.getCategory();
-//        if (headline.contains(HEADLINE_SEPARATOR)) {
-//            //split it
-//            int splitIndex = headline.indexOf(HEADLINE_SEPARATOR) + 3;
-//            article_headline = headline.substring(0, splitIndex);
-//            article_author = headline.substring(splitIndex, headline.length()) + " | ";
-//        } else {
-//            article_headline = headline;
-//            article_author = "";
-//        }
         article_author = currentArticle.getAuthor();
-        //headline = article_author + article_headline;
-        authorHeader = "Author: "+ article_author;
+        authorHeader = article_author;
 
         //find textView with viewid category
         TextView locationView = (TextView) listItemView.findViewById(R.id.category);
