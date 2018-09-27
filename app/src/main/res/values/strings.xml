@@ -25,4 +25,6 @@
     <string name="noInternet">No internet connection detected. Please check your connection and try again.</string>
     <string name="authorPlaceholder">Author Name</string>
     <string name="unknownAuthor">Unknown</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">NewsApp Settings</string>
 </resources>
