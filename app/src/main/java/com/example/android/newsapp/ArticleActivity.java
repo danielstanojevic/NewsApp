@@ -115,8 +115,6 @@ public class ArticleActivity extends AppCompatActivity
 
     @Override
     public Loader<List<Article>> onCreateLoader(int i, Bundle bundle) {
-        // Create a new loader for the given URL
-        //return new ArticleLoader(this, REQUEST_URL);
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String articleTopic = sharedPrefs.getString(
                 getString(R.string.settings_article_topic_key),
@@ -127,7 +125,6 @@ public class ArticleActivity extends AppCompatActivity
         uriBuilder.appendQueryParameter("q", articleTopic);
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("api-key", apiKey);
-        //uriBuilder.appendQueryParameter("orderby", "time");
 
         return new ArticleLoader(this, uriBuilder.toString());
     }
@@ -168,25 +165,14 @@ public class ArticleActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-    @Override
-    public void onResume() {
-        this.recreate();
-        super.onResume();
-    }
 
+    //earthquake project referenced for this project
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
         if (key.equals(getString(R.string.settings_article_topic_key)) ||
-                key.equals(getString(R.string.settings_star_rating_key))){
+                key.equals(getString(R.string.settings_star_rating_key))) {
             // Clear the ListView as a new query will be kicked off
             mAdapter.clear();
-
-            // Hide the empty state text view as the loading indicator will be displayed
-            //mEmptyStateTextView.setVisibility(View.GONE);
-
-            // Show the loading indicator while new data is being fetched
-            //View loadingIndicator = findViewById(R.id.loading_indicator);
-            //loadingIndicator.setVisibility(View.VISIBLE);
 
             // Restart the loader to requery the Guardian as the query settings have been updated
             getLoaderManager().restartLoader(ARTICLE_LOADER_ID, null, this);

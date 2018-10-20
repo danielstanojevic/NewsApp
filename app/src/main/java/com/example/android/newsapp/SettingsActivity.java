@@ -17,12 +17,6 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.settings_activity);
     }
 
-    @Override
-    public void onBackPressed(){
-        Intent home = new Intent(this, ArticleActivity.class);
-        startActivity(home);
-    }
-
     public static class NewsAppPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
         //(e.g. publishing time, country, topic category, etc. )
         //topic
